@@ -3,8 +3,8 @@ const generateToken = require("../utils/generateToken");
 
 module.exports = {
   async create(req, res) {
-    const { name, email, password } = req.body;
-    const userExists = await User.findOne({ email });
+    const { name, email, cpf, password } = req.body;
+    const userExists = await User.findOne({ cpf });
 
     if (userExists) {
       res.status(400).json("Usuário já existe!!");
@@ -13,6 +13,7 @@ module.exports = {
       const user = await User.create({
         name,
         email,
+        cpf,
         password,
       });
       res.status(201).json(user);
@@ -21,8 +22,8 @@ module.exports = {
     }
   },
   async login(req, res) {
-    const { email, password } = req.body;
-    const user = await User.findOne({ email });
+    const { cpf, password } = req.body;
+    const user = await User.findOne({ cpf });
     if (!user) {
       res.status(400).json("Usuário não existe!!");
     }
@@ -31,7 +32,7 @@ module.exports = {
       res.status(200).json({
         _id: user._id,
         name: user.name,
-        email: user.email,
+        cpf: user.cpf,
         token: generateToken(user._id),
       });
     } else {
@@ -46,6 +47,7 @@ module.exports = {
     }
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
+    user.password = req.body.password || user.password;
 
     try {
       const updateUser = await user.save();

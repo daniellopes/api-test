@@ -9,9 +9,13 @@ const userSchema = mongoose.Schema(
     },
     email: {
       type: String,
-      unique: true,
-      required: "Email address is required",
+      required: "Email é obrigatório",
       match: /.+\@.+\..+/
+    },
+    cpf: {
+      type: String,
+      unique: true,
+      required: "CPF é obrigatório"
     },
     password: {
       type: String,
