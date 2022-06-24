@@ -2,9 +2,9 @@
   "name": "tutorial-jwt-node",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "npm start src/index.js"
+    "start": "nodemon src/index.js"
   },
   "keywords": [],
   "author": "",
