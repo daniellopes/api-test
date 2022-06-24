@@ -30,9 +30,12 @@ module.exports = {
 
     if (await user.matchPassword(password)) {
       res.status(200).json({
-        _id: user._id,
-        name: user.name,
-        cpf: user.cpf,
+        user: {
+          _id: user._id,
+          name: user.name,
+          cpf: user.cpf,
+          email: user.email
+        },
         token: generateToken(user._id),
       });
     } else {
