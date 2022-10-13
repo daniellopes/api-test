@@ -7,6 +7,7 @@ const router = express.Router();
 router.route("/").post(userController.create);
 router.route("/login").post(userController.login);
 router.route("/:id").put(protect,userController.update);
+router.route("/pass").post(userController.changePass);
 
 
 module.exports = router;
