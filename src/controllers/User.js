@@ -42,6 +42,27 @@ module.exports = {
       res.status(400).json("E-mail ou senha inválidos");
     }
   },
+  async pass(req, res) {
+    const { cpf, password } = req.body;
+    const user = await User.findOne({ cpf });
+    if (!user) {
+      res.status(400).json("Usuário não existe!!");
+    }
+
+    if (await user.matchPassword(password)) {
+      res.status(200).json({
+        user: {
+          _id: user._id,
+          name: user.name,
+          cpf: user.cpf,
+          email: user.email
+        },
+        token: generateToken(user._id),
+      });
+    } else {
+      res.status(400).json("E-mail ou senha inválidos");
+    }
+  },
   async update(req, res) {
     const user = await User.findById(req.params.id);
 
