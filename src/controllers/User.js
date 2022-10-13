@@ -50,6 +50,8 @@ module.exports = {
     }
 
     if (user) {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
       res.status(200).json({
         user: {
           _id: user._id,
