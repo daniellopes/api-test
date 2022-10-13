@@ -3,7 +3,9 @@ const dotenv = require("dotenv");
 const database = require("./config/database");
 const routes = require("./routes/index.routes");
 const app = express();
+const cors = require('cors');
 
+app.use(cors());
 app.use(express.json());
 
 dotenv.config();
