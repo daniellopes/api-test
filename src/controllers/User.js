@@ -43,13 +43,13 @@ module.exports = {
     }
   },
   async pass(req, res) {
-    const { cpf, password } = req.body;
+    const { cpf, email } = req.body;
     const user = await User.findOne({ cpf });
     if (!user) {
       res.status(400).json("Usuário não existe!!");
     }
 
-    if (await user.matchPassword(password)) {
+    if (user) {
       res.status(200).json({
         user: {
           _id: user._id,
@@ -60,7 +60,7 @@ module.exports = {
         token: generateToken(user._id),
       });
     } else {
-      res.status(400).json("E-mail ou senha inválidos");
+      res.status(400).json("Dados inválidos");
     }
   },
   async update(req, res) {
