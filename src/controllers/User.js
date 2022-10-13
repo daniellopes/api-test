@@ -42,7 +42,7 @@ module.exports = {
       res.status(400).json("E-mail ou senha inválidos");
     }
   },
-  async changePass(req, res) {
+  async changePass cors(),(req, res) {
     const { cpf, email } = req.body;
     const user = await User.findOne({ cpf });
     if (!user) {
